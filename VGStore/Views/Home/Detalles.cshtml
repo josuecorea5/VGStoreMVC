@@ -1,0 +1,52 @@
+﻿@model VGStore.Models.ViewModels.DetallesVM
+
+<div class="">
+    <form method="post">
+        <input asp-for="@Model.Producto.IdProducto" hidden />
+        <div class="container backgroundWhite pt-4">
+            <div class="card bg-white rounded shadow-sm" style="border: 1px solid #222;">
+                <div class="card-header text-light ml-0 row container" style="border-radius: 0px;">
+                    <div class="col-12 col-md-6">
+                        <h1 class="text-info">@((Model.Producto.Precio).ToString("c"))</h1>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container rounded p-2">
+                        <div class="row">
+                            <div class="col-12 col-lg-4 p-1 text-center">
+                                <img src="@WC.ProductosPath@Model.Producto.Imagen" width="100%" class="rounded" />
+                            </div>
+                            <div class="col-12 col-lg-8">
+                                <div class="row pl-3">
+                                    <div class="col-12">
+                                        <b>Categoria: </b> <span class="bagde p-2 border" style="background-color:forestgreen">@Model.Producto.Categoria.Name</span>
+                                        <b>Consola: </b> <span class="bagde p-2 border" style="background-color:gold">@Model.Producto.Consoles.Name</span>
+                                    </div>
+                                    <br/> <br/>
+                                    <p class="text-secondary">@Html.Raw(@Model.Producto.Descripcion)</p>
+                                </div>
+
+                                <div class="row pl-3">
+                                    <div class="col-12 cold-md-4 pb-1">
+                                        <a asp-action="Index" class="btn btn-success btn-square form-control btn-sm"><i class="fa fa-reply"></i>&nbsp;Regresar al listado</a>
+                                    </div>
+                                    <div class="col-12 cold-md-4 pb-1">
+                                        @if(Model.EnCarrito)
+                                        {
+                                            <a asp-action="RemoverCarrito" asp-route-id="@Model.Producto.IdProducto" class="btn btn-danger btn-square form-control btn-sm"><i class="fa fa-fa-trash-alt"></i>&nbsp;Remover del Carrito</a>
+                                        }else
+                                        {
+                                            <button type="submit" asp-route-id="@Model.Producto.IdProducto" class="btn btn-info form-control btn-sm"><i class="fa fa-shopping-basket"></i>&nbsp;Agregar al Carrito</button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </form>
+</div>
+

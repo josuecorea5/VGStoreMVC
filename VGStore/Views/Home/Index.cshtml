@@ -1,0 +1,53 @@
+﻿@model VGStore.Models.ViewModels.HomeVM;
+
+<div class="container">
+    <div class="text-center">
+        <button class="btn btn-success filter-button" data-filter="all">Todas las Consolas</button>
+        @foreach (var obj in Model.Consolas)
+        {
+<button class="btn btn-outline-primary filter-button m-1" data-filter="@obj.Name.Replace(' ','_')">@obj.Name</button>}
+    </div>
+    <br />
+     <div class="text-center">
+       <button class="btn btn-success filter-button2" data-filter="all2">Todas las Categorias</button>
+          @foreach (var obj in Model.Categories)
+       {
+        <button class="btn btn-outline-primary filter-button2 m-1" data-filter="@obj.Name.Replace(' ','_')">@obj.Name</button>}
+    </div>
+    <br />
+    <div class="row">
+        @foreach (var prod in Model.Productos)
+        {
+            <partial name="_TarjetasProductos" model="prod" />
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".filter-button").click(function () {
+                let value = $(this).attr('data-filter');
+                if (value == "all") {
+                    $('.filter').show('1000');
+                } else {
+                    $(".filter").not('.' + value).hide('3000');
+                    $(".filter").filter('.' + value).show('3000');
+                }
+            })
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(".filter-button2").click(function () {
+                let value = $(this).attr('data-filter');
+                if (value == "all") {
+                    $('.filter2').show('1000');
+                } else {
+                    $(".filter2").not('.' + value).hide('3000');
+                    $(".filter2").filter('.' + value).show('3000');
+                }
+            })
+        })
+    </script>
+}
